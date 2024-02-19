@@ -1,0 +1,18 @@
+
+Json : Extract Task : Task : 3
+
+with cte as (SELECT '{"name":"praveen",
+            "std":"work",
+            "subjects": ["maths","science","social","tamil","english"]}'
+            AS blob)
+            
+        select name 
+        from cte cross join unnest(cast(json_extract(blob,'$.subjects') as array(varchar))) as t(name)
+        
+ with cte as (SELECT '{"name":"praveen",
+            "std":"work",
+            "subjects": ["maths","science","social","tamil","english"]}'
+            AS blob)
+        
+  select name 
+        from cte cross join unnest(cast(json_extract(blob,'$.subjects') as array(varchar))) as t(name)
